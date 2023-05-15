@@ -8,8 +8,10 @@ export async function getClients(req, res) {
         const clients = await db.query("SELECT * FROM customers;")
 
         res.send(clients.rows.map(row => {
-            const novo = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
-            return novo}))
+            const newRow = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
+            
+            return newRow
+        }))
 
 
     } catch (err) {
@@ -29,9 +31,9 @@ export async function getClientsId(req, res) {
 
         if (client.rows.length < 1) return res.status(404).send('Cliente não encontrado')
 
-        res.send(client.rows.map(row => {
-            const novo = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
-            return novo}))
+        client.rows[0].birthday = dayjs(customer.rows[0].birthday).format('YYYY-MM-DD');
+        
+        res.send(client.rows[0])
 
     } catch (err) {
 
