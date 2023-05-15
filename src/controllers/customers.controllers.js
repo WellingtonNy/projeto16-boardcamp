@@ -7,7 +7,10 @@ export async function getClients(req, res) {
 
         const clients = await db.query("SELECT * FROM customers;")
 
-        res.send(clients.rows)
+        res.send(clients.rows.map(row => {
+            const novo = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
+            return novo}))
+
 
     } catch (err) {
 
