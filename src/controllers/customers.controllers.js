@@ -5,14 +5,10 @@ export async function getClients(req, res) {
 
     try {
 
-        const clients = await db.query("SELECT * FROM customers;")
+        const clientess = await db.query("SELECT * FROM customers;")
+        return res.send(clientess.rows);
 
-        res.send(clients.rows.map(row => {
-            const newRow = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
-            
-            return newRow
-        }))
-
+        
 
     } catch (err) {
 
@@ -31,7 +27,7 @@ export async function getClientsId(req, res) {
 
         if (client.rows.length < 1) return res.status(404).send('Cliente não encontrado')
 
-        client.rows[0].birthday = dayjs(customer.rows[0].birthday).format('YYYY-MM-DD');
+        client.rows[0].birthday = dayjs(client.rows[0].birthday).format('YYYY-MM-DD');
         
         res.send(client.rows[0])
 
