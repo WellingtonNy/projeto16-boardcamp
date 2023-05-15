@@ -6,9 +6,15 @@ export async function getClients(req, res) {
     try {
 
         const clientess = await db.query("SELECT * FROM customers;")
-        return res.send(clientess.rows);
+    const cl = clientess.rows
+    
+    const formatado = cl.map(obj => ({
+        ...obj,
 
-        
+        birthday: new Date(obj.birthday).toISOString().split('T')[0]
+    }));
+
+        res.send(formatado)
 
     } catch (err) {
 
