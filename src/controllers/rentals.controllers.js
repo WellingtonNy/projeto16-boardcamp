@@ -35,6 +35,8 @@ export async function postRentals(req, res) {
 
     const { customerId, gameId, daysRented } = req.body
 
+    if(daysRented < 1 ) return res.sendStatus(400)
+
     try {
 
         const jogoId = await db.query(`SELECT * FROM games WHERE id = $1;`, [gameId])
