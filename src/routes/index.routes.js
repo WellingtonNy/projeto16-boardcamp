@@ -1,9 +1,9 @@
-import { Router } from "express";
-//import productRouter from "./products.routes.js"
-import gamesRouter from "./games.routes.js";
+import { Router } from "express"
+import gamesRouter from "./games.routes.js"
+import clientsRouter from "./clients.routes.js"
 
-const router = Router();
-router.use(gamesRouter);
-//router.use(productRouter);
+const router = Router()
+router.use(gamesRouter)
+router.use(clientsRouter)
 
-export default router;
+export default router
