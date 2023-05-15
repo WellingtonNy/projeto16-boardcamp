@@ -29,7 +29,9 @@ export async function getClientsId(req, res) {
 
         if (client.rows.length < 1) return res.status(404).send('Cliente não encontrado')
 
-        res.send(client.rows[0])
+        res.send(client.rows.map(row => {
+            const novo = { ...row, birthday: dayjs(row.birthday).format('YYYY-MM-DD') }
+            return novo}))
 
     } catch (err) {
 
